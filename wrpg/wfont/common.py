@@ -4,18 +4,14 @@ import struct
 PFONT_VERSION = 0x00000000
 
 
-class FontType(IntEnum):
-    UNKNOWN = 0
-    MONOSPACE = 1
-    VARIABLE_WIDTH = 2
-
-
 def header_structure():
     return (
         ">"  # Big Endian
         "4s"  # Magic Header
         "I"  # File Checksum (from NB Characters)
         "I"  # NB Characters
+        "I"  # Baseline
+        "I"  # Font defined width (0 == variable width)
     )
 
 
@@ -26,12 +22,12 @@ def header_size():
 def character_entry_strucutre():
     return (
         ">"  # Big Endian
-        "I"  # X
-        "I"  # Y
-        "I"  # Width
-        "I"  # Height
-        "i"  # X rendering offset
-        "i"  # Y rendering offset
+        "H"  # X
+        "H"  # Y
+        "H"  # Width
+        "H"  # Height
+        "h"  # X rendering offset
+        "h"  # Y rendering offset
     )
 
 
