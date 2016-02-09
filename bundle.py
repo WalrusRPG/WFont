@@ -7,7 +7,8 @@ import sys
 # There is a need to convert the values
 # {in: out}
 littera_char_translations = {
-    65: 65,  # example
+    338: 140,
+    339: 165,
 }
 
 
