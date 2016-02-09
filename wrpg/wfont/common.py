@@ -8,8 +8,7 @@ def header_structure():
     return (
         ">"  # Big Endian
         "4s"  # Magic Header
-        "I"  # File Checksum (from NB Characters)
-        "I"  # NB Characters
+        "I"  # File Checksum (from Baseline)
         "I"  # Baseline
         "I"  # Font defined width (0 == variable width)
     )

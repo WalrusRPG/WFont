@@ -21,13 +21,11 @@ def pack_fontdata(archive):
 
 def pack_header(archive, archived_font_data):
     checksum = zlib.crc32(
-        b'' + struct.pack('II',
-                          len(archive['chars']),
-                          archive['baseline']) + archived_font_data)
+        b'' + struct.pack('>II',
+                          archive['baseline'], 0) + archived_font_data)
     return struct.pack(header_structure(),
                        b'WFONT',
                        checksum,
-                       len(archive['chars']),
                        archive['baseline'],
                        0x0)
 
