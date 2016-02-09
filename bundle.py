@@ -8,7 +8,7 @@ import sys
 # {in: out}
 littera_char_translations = {
     338: 140,
-    339: 165,
+    339: 155,
 }
 
 
@@ -25,6 +25,8 @@ def parse_littera_xml_font(tree):
             new_id = littera_char_translations[xml_id]
             print('Correspondant char {} => {}'.format(xml_id, new_id))
             char_id = new_id
+        else:
+            print(xml_id)
         if char_id > 255:
             continue
 
