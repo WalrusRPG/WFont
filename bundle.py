@@ -18,6 +18,7 @@ def parse_littera_xml_font(tree):
     baseline = int(common.get('base'))
     chars = []
     chars_element = root.find('chars')
+    space_width = 1 
     for char in chars_element:
         xml_id = int(char.get('id'))
         char_id = xml_id
@@ -27,6 +28,9 @@ def parse_littera_xml_font(tree):
             char_id = new_id
         if char_id > 255:
             continue
+        # If it's a space, collect the x advance variable
+        if char_id == 32:
+            space_width = int(char.get('xadvance'))
 
         chars.append({'index': int(char_id),
                       'x': int(char.get('x')),
@@ -36,7 +40,7 @@ def parse_littera_xml_font(tree):
                       'x_offset': int(char.get('xoffset')),
                       'y_offset': int(char.get('yoffset'))
                       })
-    return {'baseline': baseline, 'chars': chars}
+    return {'baseline': baseline, 'chars': chars, 'space_width': space_width}
 
 
 def main():

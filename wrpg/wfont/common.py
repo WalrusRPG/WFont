@@ -1,7 +1,7 @@
 from enum import IntEnum
 import struct
 
-PFONT_VERSION = 0x00000000
+PFONT_VERSION = 0x00010000
 
 
 def header_structure():
@@ -9,8 +9,10 @@ def header_structure():
         ">"  # Big Endian
         "4s"  # Magic Header
         "I"  # File Checksum (from Baseline)
+        "I"  # Font version
         "I"  # Baseline
         "I"  # Font defined width (0 == variable width)
+        "I"  # Space width
     )
 
 

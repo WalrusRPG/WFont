@@ -1,7 +1,7 @@
 #!/bin/env python
 import struct
 import zlib
-from wrpg.wfont.common import (header_structure, character_entry_strucutre)
+from wrpg.wfont.common import (header_structure, character_entry_strucutre, PFONT_VERSION)
 
 
 def pack_fontdata(archive):
@@ -21,13 +21,15 @@ def pack_fontdata(archive):
 
 def pack_header(archive, archived_font_data):
     checksum = zlib.crc32(
-        b'' + struct.pack('>II',
-                          archive['baseline'], 0) + archived_font_data)
+        b'' + struct.pack('>IIII', PFONT_VERSION,
+                          archive['baseline'], 0, archive['space_width']) + archived_font_data)
     return struct.pack(header_structure(),
                        b'WFONT',
                        checksum,
+                       PFONT_VERSION,
                        archive['baseline'],
-                       0x0)
+                       0x0,
+                       archive['space_width'])
 
 
 def pack_font(archive):
